@@ -11,8 +11,8 @@ h3 {
 }
 
 .logo {
-    height: 155px;
-    width: 100px;
+    height: 15.5vw;
+    width: 10vw;
     display: block;
     margin: auto;
     margin-top: 10px;
@@ -27,6 +27,7 @@ h3 {
     overflow-x: hidden;
     padding-left: 0px;
     border: none;
+    position: absolute;
 }
 
 .container {

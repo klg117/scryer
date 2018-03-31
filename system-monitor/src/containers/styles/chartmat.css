@@ -1,6 +1,10 @@
 .chartMat {
-    width: 84%;
+    width: 85vw;
     height: 100vh;
-    float: right;
     padding-top: 0px;
+    float: right;
+}
+
+.container {
+    width: 85vw;
 }
