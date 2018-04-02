@@ -12,7 +12,11 @@ export default class GoogleLineChart extends Component {
     }
 
     componentDidMount() {
-        let data = axios.get('http://127.0.0.1:3000/api/v1/memorydata').then(response => {
+        let data = axios.get('http://localhost/api/v1/memorydata', {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+            }
+        }).then(response => {
             this.setState({
                 data: response.data.timeSeries
             })

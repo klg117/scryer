@@ -18,7 +18,7 @@ func main() {
 	var static string
 	var port string
 
-	flag.StringVar(&entry, "entry", "./dist/index.html", "the entrypoint to serve.")
+	flag.StringVar(&entry, "entry", "index.html", "the entrypoint to serve.")
 	flag.StringVar(&static, "static", "./dist", "the directory to serve static files from.")
 	flag.StringVar(&port, "port", "5001", "the `port` to listen on.")
 	flag.Parse()
@@ -41,17 +41,21 @@ func main() {
 
 	srv := &http.Server{
 		Handler: handlers.LoggingHandler(os.Stdout, r),
-		Addr:    "127.0.0.1:" + port,
+		Addr:    "localhost:" + port,
 		// Good practice: enforce timeouts for servers you create!
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
 
-	log.Fatal(srv.ListenAndServe(), handlers.CORS()(r))
+	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With"})
+	originsOk := handlers.AllowedOrigins([]string{"*"})
+	methodsOk := handlers.AllowedMethods([]string{"GET", "HEAD", "POST", "PUT", "OPTIONS"})
+	log.Fatal(srv.ListenAndServe(), handlers.CORS(headersOk, originsOk, methodsOk)(r))
 }
 
 func IndexHandler(entrypoint string) func(w http.ResponseWriter, r *http.Request) {
 	fn := func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 		http.ServeFile(w, r, entrypoint)
 	}
 
