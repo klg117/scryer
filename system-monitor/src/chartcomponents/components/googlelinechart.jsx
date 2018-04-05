@@ -7,22 +7,19 @@ export default class GoogleLineChart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: [[1,2]]
         }
     }
 
     componentDidMount() {
-        let data = axios.get('http://localhost/api/v1/memorydata', {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-            }
-        }).then(response => {
+        let dataPromise = axios.get('http://localhost:8080/api/v1/memorydata').then(response => {
+            let dataToDisplay = Object.keys(response.data[0].timeSeries).map(function(key) {
+                return [Number(key), response.data[0].timeSeries[key]];
+            });
             this.setState({
-                data: response.data.timeSeries
+                data: dataToDisplay
             })
-            response.timeSeries.forEach(e => {
-                console.log(e);
-            })
+            this.render()
         })
         /*let data = axios.get(this.props.route).then(response => {
             this.props.setChartData(response.data);
@@ -30,12 +27,24 @@ export default class GoogleLineChart extends Component {
     }
 
     render() {
+        console.log(this.state.data[0])
+        console.log(this.dataTable)
         return (
             <div className={'my-pretty-chart-container'}>
                 <Chart
                 chartType="AreaChart"
-                data={this.state.data}
+                data={[this.state.data[0][0], this.state.data[0][1]]}
                 options={{
+                    columns: [
+                        {
+                            type: 'string',
+                            label: 'time'
+                        },
+                        {
+                            type: 'number',
+                            label: 'usage'
+                        }
+                    ],
                     responsive: true,
                     colors: ['orange'],
                     backgroundColor: {fill: 'transparent'},
