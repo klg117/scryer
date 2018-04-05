@@ -1,14 +1,11 @@
-package main
+package main2
 
 import (
 	"flag"
 	"net/http"
-	"os"
-	"time"
 
 	"log"
 
-	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/scryer/app/bundles/systemdatabundle"
 )
@@ -18,48 +15,51 @@ func main() {
 	var static string
 	var port string
 
-	flag.StringVar(&entry, "entry", "index.html", "the entrypoint to serve.")
-	flag.StringVar(&static, "static", "./dist", "the directory to serve static files from.")
+	flag.StringVar(&entry, "entry", "./system-monitor/build/static/index.html", "the entrypoint to serve.")
+	flag.StringVar(&static, "static", "./system-monitor/build/static", "the directory to serve static files from.")
 	flag.StringVar(&port, "port", "5001", "the `port` to listen on.")
 	flag.Parse()
 
+	/*r := mux.NewRouter()
+	r.HandleFunc("/specific", specificHandler)
+	r.PathPrefix("/").Handler(catchAllHandler)*/
+
 	r := mux.NewRouter()
 
+	//r.PathPrefix("/site/").Handler(http.FileServer(http.Dir("./system-monitor/build/")))
+	//r.PathPrefix("/site").Handler(http.FileServer(http.Dir("./system-monitor/build/")))
+
 	systemcontroller := &systemdatabundle.SystemDataController{}
-	api := r.PathPrefix("/api/v1/").Subrouter()
+	//api := r.PathPrefix("/api/v1/").Subrouter()
 	// Routes handling
-	api.HandleFunc("/diskdata", systemcontroller.RequestDiskData).Methods("GET")
-	api.HandleFunc("/memorydata", systemcontroller.RequestMemoryData).Methods("GET")
-	api.HandleFunc("/networkdata", systemcontroller.RequestNetworkData).Methods("GET")
-	api.HandleFunc("/cpudata", systemcontroller.RequestCPUData).Methods("GET")
+	r.HandleFunc("/api/v1/diskdata", systemcontroller.RequestDiskData).Methods("GET")
+	r.HandleFunc("/api/v1/memorydata", systemcontroller.RequestMemoryData).Methods("GET")
+	r.HandleFunc("/api/v1/networkdata", systemcontroller.RequestNetworkData).Methods("GET")
+	r.HandleFunc("/api/v1/cpudata", systemcontroller.RequestCPUData).Methods("GET")
 
-	// Serve static assets directly.
-	r.PathPrefix("/dist").Handler(http.FileServer(http.Dir(static)))
+	s := http.FileServer(http.Dir("../system-monitor/build/"))
+	r.PathPrefix("/").Handler(s)
+	//	r.PathPrefix("/site/").Handler(http.StripPrefix("./system-monitor/build/", http.FileServer(http.Dir("./system-monitor/build/"))))
 
-	// Catch-all: Serve our JavaScript application's entry-point (index.html).
-	r.PathPrefix("/").HandlerFunc(IndexHandler(entry))
+	//r.PathPrefix("/").HandlerFunc(IndexHandler(entry)) //plz work -- dont override
 
-	srv := &http.Server{
-		Handler: handlers.LoggingHandler(os.Stdout, r),
-		Addr:    "localhost:" + port,
-		// Good practice: enforce timeouts for servers you create!
+	/*srv := &http.Server{
+		Handler:      handlers.LoggingHandler(os.Stdout, r),
+		Addr:         "localhost:" + port,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
-	}
+	}*/
+	//log.Fatal(srv.ListenAndServe(), (r))
+	http.Handle("/", r)
 
-	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With"})
-	originsOk := handlers.AllowedOrigins([]string{"*"})
-	methodsOk := handlers.AllowedMethods([]string{"GET", "HEAD", "POST", "PUT", "OPTIONS"})
-	log.Fatal(srv.ListenAndServe(), handlers.CORS(headersOk, originsOk, methodsOk)(r))
+	log.Fatal(http.ListenAndServe(":5001", r))
 }
 
-func IndexHandler(entrypoint string) func(w http.ResponseWriter, r *http.Request) {
+/*func IndexHandler(entrypoint string) func(w http.ResponseWriter, r *http.Request) {
 	fn := func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		http.ServeFile(w, r, entrypoint)
 	}
 
 	return http.HandlerFunc(fn)
-}
-
-///home/kyle/go/src/github.com/scryer/system-monitor/public
+}*/

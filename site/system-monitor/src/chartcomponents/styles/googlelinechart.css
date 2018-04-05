@@ -1,0 +1,7 @@
+.my-pretty-chart-container {
+    width: 80%;
+    height: 70%;
+    display: block;
+    margin: auto;
+    position: absolute;
+}

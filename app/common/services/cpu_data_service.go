@@ -9,7 +9,7 @@ import (
 type CPUDataService struct {
 }
 
-func (cpuDataService *CPUDataService) GetCPUDataWeekly() [][]time, int {
+func (cpuDataService *CPUDataService) GetCPUDataWeekly() [604800]map[time.Time]int {
 	var CPUTimeSeries [604800]map[time.Time]int
 	currentCPUUsage := 0
 

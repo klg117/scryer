@@ -12,10 +12,11 @@ export default class GoogleLineChart extends Component {
     }
 
     componentDidMount() {
-        let dataPromise = axios.get('http://localhost:8080/api/v1/memorydata').then(response => {
+        let dataPromise = axios.get('http://localhost:5001/api/v1/memorydata').then(response => {
             let dataToDisplay = Object.keys(response.data[0].timeSeries).map(function(key) {
                 return [Number(key), response.data[0].timeSeries[key]];
             });
+            console.log(dataToDisplay)
             this.setState({
                 data: dataToDisplay
             })
@@ -28,12 +29,11 @@ export default class GoogleLineChart extends Component {
 
     render() {
         console.log(this.state.data[0])
-        console.log(this.dataTable)
         return (
             <div className={'my-pretty-chart-container'}>
                 <Chart
                 chartType="AreaChart"
-                data={[this.state.data[0][0], this.state.data[0][1]]}
+                data={[this.state.data]}
                 options={{
                     columns: [
                         {
