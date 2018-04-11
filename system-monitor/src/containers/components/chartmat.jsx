@@ -1,27 +1,14 @@
 import React, {Component} from 'react';
 import '../styles/chartmat.css';
 import ChartCard from '../../details/components/chartcard'
+import axios from 'axios'
 
 export default class ChartMat extends Component {
     constructor(props) {
         super(props);
-        this.setChartData = this.setChartData.bind(this);
         this.state = {
-            chartData: {
-                'CPU': [],
-                'DISK': [],
-                'MEMORY': [],
-                'NETWORK': []
-            }
+            MemoryData: [],
         }
-    }
-
-    setChartData(systemData) {
-        let chartData = this.state.chartData;
-        chartData[systemData] = systemData.data;
-        this.setState({
-            chartData: chartData
-        })
     }
 
     render() {

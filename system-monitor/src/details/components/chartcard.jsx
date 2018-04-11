@@ -5,6 +5,7 @@ import GoogleLineChart from '../../chartcomponents/components/googlelinechart'
 class ChartCard extends Component {
     constructor(props) {
         super(props);
+        this.super()
     }
 
     render() {

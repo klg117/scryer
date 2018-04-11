@@ -1,10 +1,10 @@
-package main2
+package main
 
 import (
 	"flag"
-	"net/http"
-
+	"fmt"
 	"log"
+	"net/http"
 
 	"github.com/gorilla/mux"
 	"github.com/scryer/app/bundles/systemdatabundle"
@@ -53,6 +53,7 @@ func main() {
 	http.Handle("/", r)
 
 	log.Fatal(http.ListenAndServe(":5001", r))
+	fmt.Println("now listening at 5001")
 }
 
 /*func IndexHandler(entrypoint string) func(w http.ResponseWriter, r *http.Request) {

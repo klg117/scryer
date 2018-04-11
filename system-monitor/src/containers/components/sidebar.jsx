@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import DisplayButton from '../../details/components/displaybutton'
 import '../styles/sidebar.css';
+import ChartData from '../../classes/ChartData'
 
 class SideBar extends Component {
     constructor(props) {
