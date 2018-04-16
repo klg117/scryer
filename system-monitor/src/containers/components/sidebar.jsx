@@ -3,7 +3,7 @@ import DisplayButton from '../../details/components/displaybutton'
 import '../styles/sidebar.css';
 import ChartData from '../../classes/ChartData'
 
-class SideBar extends Component {
+export default class SideBar extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -31,5 +31,3 @@ class SideBar extends Component {
         );
     }
 }
-
-export default SideBar;

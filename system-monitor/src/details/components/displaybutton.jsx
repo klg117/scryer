@@ -1,10 +1,6 @@
 import React, {Component} from 'react'
 
 export default class DisplayButton extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     handleClick = () => {
         this.props.onButtonClick(this.props.title);
     }

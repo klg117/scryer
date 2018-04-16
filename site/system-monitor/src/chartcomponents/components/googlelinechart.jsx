@@ -7,7 +7,7 @@ export default class GoogleLineChart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [[1,2]]
+            data: this.props.chartData
         }
     }
 
@@ -16,20 +16,14 @@ export default class GoogleLineChart extends Component {
             let dataToDisplay = Object.keys(response.data[0].timeSeries).map(function(key) {
                 return [Number(key), response.data[0].timeSeries[key]];
             });
-            console.log(dataToDisplay)
-            this.setState({
-                data: dataToDisplay
-            })
-            this.render()
         })
-        /*let data = axios.get(this.props.route).then(response => {
-            this.props.setChartData(response.data);
-        });*/
     }
 
     render() {
-        console.log(this.state.data[0])
         return (
+            if(this.state.data) {
+
+            }
             <div className={'my-pretty-chart-container'}>
                 <Chart
                 chartType="AreaChart"

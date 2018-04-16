@@ -2,12 +2,7 @@ import React, {Component} from 'react'
 import '../styles/chartcard.css';
 import GoogleLineChart from '../../chartcomponents/components/googlelinechart'
 
-class ChartCard extends Component {
-    constructor(props) {
-        super(props);
-        this.super()
-    }
-
+export default class ChartCard extends Component {
     render() {
         return (
             <div className="card black darken-1 chartCard col s2" style={{width: this.props.width, height: this.props.height}}>
@@ -22,5 +17,3 @@ class ChartCard extends Component {
         );
     }
 }
-
-export default ChartCard;

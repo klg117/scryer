@@ -19,7 +19,7 @@ export default class GoogleLineChart extends Component {
                         }
                     ],
                     rows: [
-                        this.state.data
+                        []
                     ],
                     responsive: true,
                     colors: ['orange'],
