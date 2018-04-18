@@ -15,7 +15,7 @@ func TestDiskDataSpec(t *testing.T) {
 			diskdata := diskDataService.GetDiskDataWeekly()
 
 			Convey("it should return a SystemData object", func() {
-				So(diskdata, ShouldHaveLength, 604800)
+				So(diskdata, ShouldHaveLength, 10080)
 			})
 		})
 	})

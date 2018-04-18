@@ -15,7 +15,7 @@ func TestNetworkDataSpec(t *testing.T) {
 			networkdata := networkDataService.GetNetworkDataWeekly()
 
 			Convey("it should return a SystemData object", func() {
-				So(networkdata, ShouldHaveLength, 604800)
+				So(networkdata, ShouldHaveLength, 10080)
 			})
 		})
 	})

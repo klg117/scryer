@@ -5,27 +5,24 @@ import axios from 'axios'
 
 export default class ChartMat extends Component {
     render() {
-        let numCharts = this.props.charts.length;
+        let numCharts = this.props.chartsToDisplay.length;
         let height = (100/(Math.sqrt(numCharts))) + '%';
         let width = (100/(Math.sqrt(numCharts))) + '%';
-        this.props.charts.forEach(e => {
-            console.log(e)
-        })
-        const chartsToDisplay = this.props.charts.map((e, i) =>
+        const chartsToRender = Array.from(this.props.chartsToDisplay).map((e, i) =>
             <ChartCard
             key={i}
             width={width}
             height={height}
             title={e.title}
-            route={this.props.charts[e.route]}
             chartId={'chart' + i}
             setChartData={this.setChartData}
-            chartData={e}
+            charts={e.title}
+            chartData={this.props.chartData.get(e.title)}
             />
         );
         return(
             <div className="chartMat row z-depth-5 black">
-                {chartsToDisplay}
+                {chartsToRender}
             </div>
         );
     }

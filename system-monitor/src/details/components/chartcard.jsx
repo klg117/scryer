@@ -12,7 +12,7 @@ export default class ChartCard extends Component {
                 <GoogleLineChart 
                 chartId={this.props.chartId}
                 setChartData={this.props.setChartData}
-                route={this.props.route}/>
+                chartData={this.props.chartData}/>
             </div>
         );
     }

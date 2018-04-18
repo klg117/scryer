@@ -9,16 +9,16 @@ import (
 type CPUDataService struct {
 }
 
-func (cpuDataService *CPUDataService) GetCPUDataWeekly() [604800]map[time.Time]int {
-	var CPUTimeSeries [604800]map[time.Time]int
+func (cpuDataService *CPUDataService) GetCPUDataWeekly() [10080]map[time.Time]int {
+	var CPUTimeSeries [10080]map[time.Time]int
 	currentCPUUsage := 0
 
 	now := time.Now()
 	lastWeek := now.AddDate(0, 0, -7)
 	timeIteration := lastWeek
 
-	for i := 0; i < 604800; i++ {
-		timeIteration = timeIteration.Add(time.Second)
+	for i := 0; i < 10080; i++ {
+		timeIteration = timeIteration.Add(time.Minute)
 		snapShot := make(map[time.Time]int)
 		if rand.Intn(1000) == 5 {
 			currentCPUUsage = rand.Intn(101)

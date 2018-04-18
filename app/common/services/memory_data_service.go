@@ -13,8 +13,8 @@ type MemoryDataService struct {
 }
 
 //GetMemoryDataWeekly ...
-func (memoryDataService *MemoryDataService) GetMemoryDataWeekly() [604800]map[time.Time]int {
-	var memoryTimeSeries [604800]map[time.Time]int
+func (memoryDataService *MemoryDataService) GetMemoryDataWeekly() [10080]map[time.Time]int {
+	var memoryTimeSeries [10080]map[time.Time]int
 	var memoryStack adts.Stack
 	idle := 2
 	gaming := 8
@@ -25,8 +25,8 @@ func (memoryDataService *MemoryDataService) GetMemoryDataWeekly() [604800]map[ti
 	lastWeek := now.AddDate(0, 0, -7)
 	timeIteration := lastWeek
 
-	for i := 0; i < 604800; i++ {
-		timeIteration = timeIteration.Add(time.Second)
+	for i := 0; i < 10080; i++ {
+		timeIteration = timeIteration.Add(time.Minute)
 		snapShot := make(map[time.Time]int)
 		if rand.Intn(1000) == 1 {
 			memoryStack.Push(actions[rand.Intn(3)])

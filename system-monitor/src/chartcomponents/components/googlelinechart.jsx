@@ -4,23 +4,36 @@ import '../styles/googlelinechart.css'
 import axios from 'axios'
 
 export default class GoogleLineChart extends Component {
+    constructor(props) {
+        super(props);
+        this.state= {
+            testData: [['TIME', 'USAGE']]
+        };
+    }
+
+    componentDidMount() {
+        //let dataPoint = this.props.chartData[570201][1];
+        this.props.chartData.forEach(element => {
+            let dataPoint = element[1];
+            let value = dataPoint[1];
+            let time = dataPoint[0];
+            let arrayToPush = [time, value];
+            this.setState((prevState) => {
+                testData: prevState.testData.push(arrayToPush)
+            });
+        });
+        for (var index = 0; index < 10; index++) {
+            let current = this.props.chartData[index + 100000]
+        }
+    }
+
     render() {
         return (
             <div className={'my-pretty-chart-container'}>
                 <Chart
                 chartType="AreaChart"
+                data={this.state.testData}
                 options={{
-                    columns: [
-                        {
-                            label: 'time'
-                        },
-                        {
-                            label: 'usage'
-                        }
-                    ],
-                    rows: [
-                        []
-                    ],
                     responsive: true,
                     colors: ['orange'],
                     backgroundColor: {fill: 'transparent'},

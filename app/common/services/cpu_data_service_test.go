@@ -15,7 +15,7 @@ func TestCPUDataSpec(t *testing.T) {
 			cpudata := cpuDataService.GetCPUDataWeekly()
 
 			Convey("it should return a SystemData object", func() {
-				So(cpudata, ShouldHaveLength, 604800)
+				So(cpudata, ShouldHaveLength, 10080)
 			})
 		})
 	})

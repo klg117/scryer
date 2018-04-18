@@ -1,4 +1,4 @@
-package main23
+package main
 
 import (
 	"log"
@@ -19,6 +19,9 @@ func main() {
 	s.HandleFunc("/memorydata", systemcontroller.RequestMemoryData).Methods("GET")
 	s.HandleFunc("/networkdata", systemcontroller.RequestNetworkData).Methods("GET")
 	s.HandleFunc("/cpudata", systemcontroller.RequestCPUData).Methods("GET")
+
+	r.PathPrefix("/").Handler(http.FileServer(http.Dir("../system-monitor/build/")))
+
 	http.Handle("/", r)
 
 	//headersOk := handlers.AllowedHeaders([]string{"X-Requested-With"})

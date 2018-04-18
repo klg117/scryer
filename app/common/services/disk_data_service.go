@@ -11,8 +11,8 @@ type DiskDataService struct {
 }
 
 //GetDiskDataWeekly ...
-func (diskDataService *DiskDataService) GetDiskDataWeekly() [604800]map[time.Time]int {
-	var diskTimeSeries [604800]map[time.Time]int
+func (diskDataService *DiskDataService) GetDiskDataWeekly() [10080]map[time.Time]int {
+	var diskTimeSeries [10080]map[time.Time]int
 	idle := false
 	diskSizeInMB := 100000000
 	currentDisk := 0
@@ -21,14 +21,14 @@ func (diskDataService *DiskDataService) GetDiskDataWeekly() [604800]map[time.Tim
 	lastWeek := now.AddDate(0, 0, -7)
 	timeIteration := lastWeek
 
-	for i := 0; i < 604800; i++ {
+	for i := 0; i < 10080; i++ {
 		snapShot := make(map[time.Time]int)
 		writeSpeedLow := 1
 		writeSpeedHigh := 1800
 		if i%5 == 0 {
 			writeSpeedHigh = writeSpeedHigh / 3
 		}
-		timeIteration = timeIteration.Add(time.Second)
+		timeIteration = timeIteration.Add(time.Minute)
 		if rand.Intn(100) < 90 {
 			idle = true
 		}

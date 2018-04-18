@@ -15,7 +15,7 @@ func TestMemoryDataSpec(t *testing.T) {
 			memorydata := memoryDataService.GetMemoryDataWeekly()
 
 			Convey("it should return a SystemData object", func() {
-				So(memorydata, ShouldHaveLength, 604800)
+				So(memorydata, ShouldHaveLength, 10080)
 			})
 		})
 	})
