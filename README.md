@@ -29,4 +29,5 @@ simply navigate to the /system-monitor folder and first run npm install, then np
 Display: The chart cards do not size properly when multiple charts are displayed.<br />
 Display: The chart cards do not properly centered when displayed.<br />
 Display: The charts do not automatically re-render when the hourly/weekly switch is toggled. The user must instead<br/>
-click to view the charts again.
+click to view the charts again.<br />
+Display: Time doesn't properly display :(
