@@ -7,10 +7,15 @@ export default class SideBar extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+        this.swapHourlyDisplayState = this.swapHourlyDisplayState.bind(this);
     }
 
     handleChange(e) {
         this.props.modifyDisplayedCharts(e);
+    }
+
+    swapHourlyDisplayState() {
+        this.props.swapHourlyDisplayState();
     }
 
     render() {
@@ -27,6 +32,16 @@ export default class SideBar extends Component {
             <img alt='' className="logo" src="http://www.thebluelizardlounge.com/Laughingbird%20Documents/Logo%20Libraries/Logo%20Templates/DevJakCody/Creative%20Pak%20Elements--fire-orb.png"/>
             <h3>Scryer</h3>
             {listItems}
+            <div className="center">
+                <div className="switch" >
+                    <label className="toggle orange-text" >
+                    Weekly Data
+                    <input type="checkbox"/>
+                    <span className="lever orange" onClick={this.swapHourlyDisplayState}></span>
+                    Hourly Data
+                    </label>
+                </div>
+            </div>
         </div>
         );
     }

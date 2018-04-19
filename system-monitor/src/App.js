@@ -75,15 +75,10 @@ export default class App extends Component {
                 chartsToDisplay={this.state.chartsToDisplay}
                 hourlyData={this.state.hourlyData}
                 />
-                <SideBar modifyDisplayedCharts={this.handleDisplayedChartsChange}/>
-                <div className="switch" >
-                    <label className="toggle" >
-                    Off
-                    <input type="checkbox"/>
-                    <span className="lever" onClick={this.swapHourlyDisplayState}></span>
-                    On
-                    </label>
-                </div>
+                <SideBar 
+                modifyDisplayedCharts={this.handleDisplayedChartsChange}
+                swapHourlyDisplayState={this.swapHourlyDisplayState}
+                />
             </div>
         );
     }
