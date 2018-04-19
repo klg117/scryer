@@ -9,7 +9,6 @@ export default class ChartMat extends Component {
     }
 
     render() {
-        console.log(this.props.hourlyData)
         let numCharts = this.props.chartsToDisplay.size;
         let height = (75/(Math.sqrt(numCharts))) + '%';
         let width = (75/(Math.sqrt(numCharts))) + '%';

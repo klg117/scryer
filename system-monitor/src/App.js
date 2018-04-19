@@ -24,7 +24,6 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        console.log('called')
         this.state.charts.forEach(chart => {
             chart.getData();
         });
@@ -55,7 +54,6 @@ export default class App extends Component {
     }
 
     swapHourlyDisplayState() {
-        console.log('we swapped state')
         if (this.state.hourlyData) {
             this.setState({
                 hourlyData: false
@@ -67,7 +65,7 @@ export default class App extends Component {
         }
         this.setState({
             chartsToDisplay: new Map()
-        })
+        });
     }
 
     render() {
