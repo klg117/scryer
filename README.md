@@ -24,3 +24,9 @@ execute main.exe <-- if windows
 
 <strong>To run the react app separately:</strong><br />
 simply navigate to the /system-monitor folder and first run npm install, then npm start. The app should now be running at localhost:3000
+
+<strong>Current bugs</strong>
+Display: The chart cards do not size properly when multiple charts are displayed.
+Display: The chart cards do not properly centered when displayed.
+Display: The charts do not automatically re-render when the hourly/weekly switch is toggled. The user must instead<br/>
+click to view the charts again.
