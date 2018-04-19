@@ -31,3 +31,8 @@ Display: The chart cards do not properly centered when displayed.<br />
 Display: The charts do not automatically re-render when the hourly/weekly switch is toggled. The user must instead<br/>
 click to view the charts again.<br />
 Display: Time doesn't properly display :(
+API: the tests do not run
+
+<strong>Todo</strong>
+1. Make the tests runnable
+2. Fix display bugs
