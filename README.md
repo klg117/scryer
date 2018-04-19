@@ -1,7 +1,7 @@
 <h1>Scryer: view your system data</h1>
 
 Scryer aims to provide an easy-to use web interface to view your key system data.<br />
-<strong>Scryer currently supports viewing:<strong><br />
+<strong>Scryer currently supports viewing:</strong><br />
 Memory usage
 <br />
 CPU usage
