@@ -1,3 +1,15 @@
+.toggle {
+  color: white;
+}
+.switch {
+  color: white;
+}
+.checkbox {
+  color: white;
+}
+.lever {
+  color: white;
+}
 .loader {
     font-size: 10px;
     margin: 50px auto;

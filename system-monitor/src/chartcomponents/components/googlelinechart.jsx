@@ -11,8 +11,11 @@ export default class GoogleLineChart extends Component {
         };
     }
 
+    forceUpdate() {
+        this.render();
+    }
+
     componentDidMount() {
-        //let dataPoint = this.props.chartData[570201][1];
         this.props.chartData.forEach(element => {
             let dataPoint = element[1];
             let value = dataPoint[1];

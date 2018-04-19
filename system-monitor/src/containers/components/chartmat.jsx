@@ -4,26 +4,50 @@ import ChartCard from '../../details/components/chartcard'
 import axios from 'axios'
 
 export default class ChartMat extends Component {
+    componentDidUpdate() {
+        this.render();
+    }
+
     render() {
-        let numCharts = this.props.chartsToDisplay.length;
-        let height = (100/(Math.sqrt(numCharts))) + '%';
-        let width = (100/(Math.sqrt(numCharts))) + '%';
-        const chartsToRender = Array.from(this.props.chartsToDisplay).map((e, i) =>
+        console.log(this.props.hourlyData)
+        let numCharts = this.props.chartsToDisplay.size;
+        let height = (75/(Math.sqrt(numCharts))) + '%';
+        let width = (75/(Math.sqrt(numCharts))) + '%';
+        const chartsToRender = Array.from(this.props.chartsToDisplay).map((chartData, i) =>
+        <ChartCard
+        key={i}
+        width={width}
+        height={height}
+        title={chartData[1].title}
+        chartId={'chart' + i}
+        charts={chartData[1].title}
+        chartData={chartData[1].data}
+        />
+        );
+        const chartsToRenderPartial = Array.from(this.props.chartsToDisplay).map((chartData, i) =>
             <ChartCard
             key={i}
             width={width}
             height={height}
-            title={e.title}
+            title={chartData[1].title}
             chartId={'chart' + i}
-            setChartData={this.setChartData}
-            charts={e.title}
-            chartData={this.props.chartData.get(e.title)}
+            charts={chartData[1].title}
+            chartData={chartData[1].partialData}
+            hourlyData= {this.props.hourlyData}
             />
         );
-        return(
-            <div className="chartMat row z-depth-5 black">
-                {chartsToRender}
-            </div>
-        );
+        if (this.props.hourlyData) {
+            return(
+                <div className="chartMat row z-depth-5 black">
+                    {chartsToRenderPartial}
+                </div>
+            );
+        } else {
+            return(
+                <div className="chartMat row z-depth-5 black">
+                    {chartsToRender}
+                </div>
+            );
+        }
     }
 }
